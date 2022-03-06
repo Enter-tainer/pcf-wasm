@@ -1,9 +1,7 @@
 use fumen::{CellColor, Fumen};
-use pcf::{BitBoard, Piece, PieceSet};
+use pcf::{BitBoard, Piece, PieceSet, common};
 use rand::prelude::*;
 use std::sync::atomic::AtomicBool;
-
-mod common;
 
 fn main() {
     let board = BitBoard(0b1100001111_1110001111_1111001111_1110001111);

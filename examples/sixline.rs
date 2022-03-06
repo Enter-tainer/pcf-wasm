@@ -1,9 +1,7 @@
 use fumen::Fumen;
-use pcf::{placeability, BitBoard, Piece};
+use pcf::{placeability, BitBoard, Piece, common};
 use rand::prelude::*;
 use std::sync::atomic::AtomicBool;
-
-mod common;
 
 fn main() {
     let mut queue = [

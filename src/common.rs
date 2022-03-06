@@ -1,5 +1,5 @@
 use fumen::{CellColor, Fumen, Page};
-use pcf::{BitBoard, Piece, Placement};
+use crate::{BitBoard, Piece, Placement};
 
 pub fn draw_placements(page: &mut Page, placements: &[Placement]) {
     for placement in placements {
@@ -61,11 +61,11 @@ pub fn pcf_piece_to_fumen_piece(piece: Piece) -> fumen::PieceType {
     }
 }
 
-pub fn pcf_rot_to_fumen_rot(rot: pcf::Rotation) -> fumen::RotationState {
+pub fn pcf_rot_to_fumen_rot(rot: crate::Rotation) -> fumen::RotationState {
     match rot {
-        pcf::Rotation::North => fumen::RotationState::North,
-        pcf::Rotation::South => fumen::RotationState::South,
-        pcf::Rotation::West => fumen::RotationState::West,
-        pcf::Rotation::East => fumen::RotationState::East,
+        crate::Rotation::North => fumen::RotationState::North,
+        crate::Rotation::South => fumen::RotationState::South,
+        crate::Rotation::West => fumen::RotationState::West,
+        crate::Rotation::East => fumen::RotationState::East,
     }
 }
