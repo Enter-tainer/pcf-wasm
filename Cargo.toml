@@ -1,6 +1,6 @@
 [package]
 name = "pcf-wasm"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["MinusKelvin <mark.carlson@minuskelvin.net>", "mgt <mgt@oi-wiki.org>"]
 edition = "2018"
 

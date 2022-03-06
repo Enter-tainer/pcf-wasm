@@ -1,4 +1,9 @@
 # pcf-wasm
 
 serve: `yarn serve`
-build: `yarn build`
+build: 
+```
+wasm-pack build --scope=mgtd --target=web
+cd pkg
+npm publish --access=public
+```
