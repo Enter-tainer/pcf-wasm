@@ -265,8 +265,7 @@ pub fn get_pc(board: u64, sequence: String, allow_hold: Option<bool>) -> String 
     let allow_hold = allow_hold.unwrap_or(true);
     let board = BitBoard(board);
     let queue: Vec<_> = sequence
-        .chars()
-        .map(|x| match x {
+        .chars().filter_map(|x| match x {
             'I' => Some(Piece::I),
             'T' => Some(Piece::T),
             'O' => Some(Piece::O),
@@ -276,7 +275,6 @@ pub fn get_pc(board: u64, sequence: String, allow_hold: Option<bool>) -> String 
             'Z' => Some(Piece::Z),
             _ => None,
         })
-        .filter_map(core::convert::identity)
         .collect();
     solve_pc(
         &queue,
