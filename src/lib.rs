@@ -1,7 +1,11 @@
+use std::sync::atomic::AtomicBool;
+use fumen::Fumen;
+
 use arrayvec::ArrayVec;
 
 mod combination;
 pub mod placeability;
+pub mod common;
 mod solve;
 
 pub use combination::*;
@@ -252,3 +256,34 @@ const HURDLE_MASKS: [u64; 64] = {
     }
     result
 };
+
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn get_pc(board: u64, sequence: String, allow_hold: Option<bool>) -> String {
+    let mut fumen = Fumen::default();
+    let allow_hold = allow_hold.unwrap_or(true);
+    let board = BitBoard(board);
+    let queue: Vec<_> = sequence
+        .chars().filter_map(|x| match x {
+            'I' => Some(Piece::I),
+            'T' => Some(Piece::T),
+            'O' => Some(Piece::O),
+            'L' => Some(Piece::L),
+            'J' => Some(Piece::J),
+            'S' => Some(Piece::S),
+            'Z' => Some(Piece::Z),
+            _ => None,
+        })
+        .collect();
+    solve_pc(
+        &queue,
+        board,
+        allow_hold,
+        true,
+        &AtomicBool::new(false),
+        placeability::simple_srs_spins,
+        |soln| common::add_placement_pages(&mut fumen, board, soln),
+    );
+    fumen.encode()
+}

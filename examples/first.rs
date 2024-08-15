@@ -3,8 +3,6 @@ use pcf::{placeability, BitBoard, Piece};
 use rand::prelude::*;
 use std::sync::atomic::AtomicBool;
 
-mod common;
-
 fn main() {
     let mut queue = [
         Piece::I,
@@ -39,7 +37,7 @@ fn main() {
         true,
         &AtomicBool::new(false),
         placeability::tucks,
-        move |soln| common::add_placement_pages(&mut fumen, BitBoard(0), soln),
+        move |soln| pcf::common::add_placement_pages(&mut fumen, BitBoard(0), soln),
     );
     println!("Done in {:?}.", t.elapsed());
 
